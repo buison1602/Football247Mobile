@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "584685687964",
+    "project_id": "football247-f1c73",
+    "storage_bucket": "football247-f1c73.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584685687964:android:64ee6dbe072592f0adc959",
+        "android_client_info": {
+          "package_name": "vn.edu.tlu.buicongson.football247"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN5iU1PxpGcfiuqUS4yAqsQink7ItphmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
