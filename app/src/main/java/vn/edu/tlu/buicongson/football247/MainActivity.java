@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         .into(logoImageView);
             } else {
                 Log.w(TAG, "Không tìm thấy đội bóng với ID: " + teamId);
+//                123
             }
         }).addOnFailureListener(e -> Log.e(TAG, "Lỗi khi lấy thông tin đội bóng: " + teamId, e));
     }
