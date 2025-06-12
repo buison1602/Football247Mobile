@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="#1E1E1E"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/text_match_time_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="#AEAEAE"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Tomorrow 15:00" />
+
+        <ImageView
+            android:id="@+id/image_home_logo_item"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/text_vs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_match_time_item"
+            tools:src="@drawable/arsenal" />
+
+        <TextView
+            android:id="@+id/text_home_name_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/image_home_logo_item"
+            app:layout_constraintStart_toStartOf="@+id/image_home_logo_item"
+            app:layout_constraintTop_toBottomOf="@id/image_home_logo_item"
+            tools:text="ARSENAL" />
+
+        <TextView
+            android:id="@+id/text_vs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VS"
+            android:textColor="#8A8A8A"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_home_logo_item"
+            app:layout_constraintEnd_toStartOf="@+id/image_away_logo_item"
+            app:layout_constraintStart_toEndOf="@+id/image_home_logo_item"
+            app:layout_constraintTop_toTopOf="@+id/image_home_logo_item" />
+
+        <ImageView
+            android:id="@+id/image_away_logo_item"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_home_logo_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_vs"
+            app:layout_constraintTop_toTopOf="@+id/image_home_logo_item"
+            tools:src="@drawable/manutd" />
+
+        <TextView
+            android:id="@+id/text_away_name_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/image_away_logo_item"
+            app:layout_constraintStart_toStartOf="@+id/image_away_logo_item"
+            app:layout_constraintTop_toBottomOf="@id/image_away_logo_item"
+            tools:text="MAN UTD" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
