@@ -1,8 +1,6 @@
 package vn.edu.tlu.buicongson.football247.models;
 
-// Match.java
 public class Match {
-    // Tên các thuộc tính phải khớp với tên các field trong Firestore
     private String home_team_id;
     private String away_team_id;
     private String match_timestamp;

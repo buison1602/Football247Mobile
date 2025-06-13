@@ -19,22 +19,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.edu.tlu.buicongson.football247.adapters.LatestArticlesAdapter;
 import vn.edu.tlu.buicongson.football247.adapters.UpcomingMatchesAdapter;
+import vn.edu.tlu.buicongson.football247.models.Article;
 import vn.edu.tlu.buicongson.football247.models.Match;
 import vn.edu.tlu.buicongson.football247.models.Team;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
+    private RecyclerView recyclerviewUpcomingMatches, recyclerviewLatestArticles;
     private UpcomingMatchesAdapter upcomingMatchesAdapter;
-    private RecyclerView recyclerviewUpcomingMatches;
     private List<Match> upcomingMatchList = new ArrayList<>();
+    private LatestArticlesAdapter latestArticlesAdapter;
+    private List<Article> latestArticleList = new ArrayList<>();
     ImageView imageTeamLeft, imageTeamRight;
     TextView textTeamNameLeft, textTeamNameRight, textScore, textMatchTime;
 
@@ -46,15 +51,19 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         upcomingMatchesAdapter = new UpcomingMatchesAdapter(upcomingMatchList, this);
-
         recyclerviewUpcomingMatches = findViewById(R.id.recyclerview_upcoming_matches);
-
         // Tạo một LayoutManager với hướng là HORIZONTAL
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         // Gán LayoutManager đã được cấu hình vào RecyclerView
         recyclerviewUpcomingMatches.setLayoutManager(layoutManager);
-
         recyclerviewUpcomingMatches.setAdapter(upcomingMatchesAdapter);
+
+
+        latestArticlesAdapter = new LatestArticlesAdapter(latestArticleList, this);
+        recyclerviewLatestArticles = findViewById(R.id.recyclerview_latest_news);
+        recyclerviewLatestArticles.setLayoutManager(new LinearLayoutManager(this));
+        recyclerviewLatestArticles.setAdapter(latestArticlesAdapter);
+
 
         imageTeamLeft = findViewById(R.id.image_team_left);
         imageTeamRight = findViewById(R.id.image_team_right);
@@ -64,10 +73,13 @@ public class MainActivity extends AppCompatActivity {
         textMatchTime = findViewById(R.id.text_match_time);
 
         fetchFeaturedMatch();
+
+        fetchUpcommingMatches();
+
+        fetchLatestNews();
     }
 
     private void fetchFeaturedMatch() {
-        // Load data for FEATURED MATCH
         db.collection("matches")
                 .whereEqualTo("isFeatured", true)
                 .limit(1)
@@ -96,8 +108,9 @@ public class MainActivity extends AppCompatActivity {
                         Log.w(TAG, "Error getting documents: ", task.getException());
                     }
                 }).addOnFailureListener(e -> Log.e(TAG, "Lỗi khi lấy thông tin trận đấu nổi bật", e));
+    }
 
-        // Load data for Upcomming Matches RecyclerView
+    private void fetchUpcommingMatches() {
         db.collection("matches")
                 .whereEqualTo("status","upcoming")
                 .get()
@@ -115,6 +128,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                     upcomingMatchesAdapter.notifyDataSetChanged();
                 }).addOnFailureListener(e -> Log.e(TAG, "Lỗi khi lấy thông tin đội bóng: ", e));
+    }
+
+    private void fetchLatestNews() {
+        db.collection("news")
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .limit(20)
+                .get()
+                .addOnSuccessListener(task -> {
+                    latestArticleList.clear();
+                    if (task.isEmpty()) {
+                        Toast.makeText(this, "Không có bài viết nào.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    for (QueryDocumentSnapshot articleDoc : task) {
+                        Article article = articleDoc.toObject(Article.class);
+                        latestArticleList.add(article);
+                    }
+
+                    latestArticlesAdapter.notifyDataSetChanged();
+                }).addOnFailureListener(e -> Log.e(TAG, "Lỗi khi lấy thông tin bài viết: ", e));
     }
 
     private void loadTeamData(String teamId, TextView nameTextView, ImageView logoImageView) {
