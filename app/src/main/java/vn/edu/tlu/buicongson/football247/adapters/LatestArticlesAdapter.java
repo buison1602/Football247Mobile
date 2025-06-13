@@ -32,6 +32,16 @@ public class LatestArticlesAdapter extends RecyclerView.Adapter<LatestArticlesAd
     private Context context;
     private FirebaseFirestore db;
 
+    public interface OnItemClickListener {
+        void onItemClick(Article article);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     public LatestArticlesAdapter(List<Article> articleList, Context context) {
         this.articleList = articleList;
         this.context = context;
@@ -42,7 +52,7 @@ public class LatestArticlesAdapter extends RecyclerView.Adapter<LatestArticlesAd
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
-        return new ArticleViewHolder(view);
+        return new ArticleViewHolder(view, listener);
     }
 
     @Override
@@ -62,11 +72,18 @@ public class LatestArticlesAdapter extends RecyclerView.Adapter<LatestArticlesAd
         TextView titleArticleItem, createdAtArticleItem;
         ImageView imageHeaderArticleItem;
 
-        public ArticleViewHolder(@NonNull View itemView) {
+        public ArticleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             titleArticleItem = itemView.findViewById(R.id.title_article_item);
             createdAtArticleItem = itemView.findViewById(R.id.created_at_article_item);
             imageHeaderArticleItem = itemView.findViewById(R.id.image_header_article_item);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick((Article) ((LatestArticlesAdapter) getBindingAdapter()).articleList.get(position));
+                }
+            });
         }
     }
 
@@ -103,4 +120,6 @@ public class LatestArticlesAdapter extends RecyclerView.Adapter<LatestArticlesAd
                     }
                 }).addOnFailureListener(e -> Log.e(TAG, "Lỗi khi lấy thông tin đội bóng: " + articleId, e));
     }
+
+
 }

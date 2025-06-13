@@ -2,9 +2,10 @@ package vn.edu.tlu.buicongson.football247.models;
 
 import com.google.firebase.Timestamp;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Article {
+public class Article implements Serializable {
     private String id;
     private String title;
     private String description;

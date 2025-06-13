@@ -1,252 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="center">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:contentInsetStart="0dp"
-            app:contentInsetEnd="0dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="16dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:id="@+id/imageLogo"
-                        android:layout_width="52dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/custtomlogo"
-                        android:src="@drawable/ic_logo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Football247"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="10dp"/>
-
-                </LinearLayout>
-
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:text="Sign in"
-                    android:textColor="@color/black"
-                    app:backgroundTint="@color/green"
-                    app:cornerRadius="8dp"
-                    android:layout_alignParentRight="true" />
-
-            </RelativeLayout>
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_above="@id/bottom_navigation"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:labelVisibilityMode="labeled"
+        android:background="#1E1E1E"
+        app:menu="@menu/bottom_navigation_menu" />
 
-            <androidx.cardview.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="#1E1E1E"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/text_title_featured"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="FEATURED MATCH"
-                        android:textColor="#9E9E9E"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/text_live_indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="4dp"
-                        android:gravity="center"
-                        android:text="LIVE"
-                        android:textColor="@color/green"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/text_title_featured"
-                        tools:ignore="HardcodedText" />
-
-                    <ImageView
-                        android:id="@+id/image_team_left"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="24dp"
-                        app:layout_constraintEnd_toStartOf="@id/text_score"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/text_title_featured"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/text_team_name_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/image_team_left"
-                        app:layout_constraintStart_toStartOf="@id/image_team_left"
-                        app:layout_constraintTop_toBottomOf="@id/image_team_left" />
-
-                    <ImageView
-                        android:id="@+id/image_team_right"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        app:layout_constraintBottom_toBottomOf="@id/image_team_left"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/text_score"
-                        app:layout_constraintTop_toTopOf="@id/image_team_left"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/text_team_name_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/image_team_right"
-                        app:layout_constraintStart_toStartOf="@id/image_team_right"
-                        app:layout_constraintTop_toBottomOf="@id/image_team_right" />
-
-                    <TextView
-                        android:id="@+id/text_score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:textColor="@color/white"
-                        android:textSize="40sp"
-                        app:layout_constraintBottom_toBottomOf="@id/image_team_left"
-                        app:layout_constraintEnd_toStartOf="@id/image_team_right"
-                        app:layout_constraintStart_toEndOf="@id/image_team_left"
-                        app:layout_constraintTop_toTopOf="@id/image_team_left" />
-
-                    <TextView
-                        android:id="@+id/text_match_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/green"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/text_score"
-                        app:layout_constraintStart_toStartOf="@id/text_score"
-                        app:layout_constraintTop_toBottomOf="@id/text_score" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/title_upcoming_matches"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upcoming Matches"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_upcoming_matches"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_upcoming_match"/>
-
-            <TextView
-                android:id="@+id/title_latest_news"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Latest News"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_latest_news"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_upcoming_match"/>
-
-
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
