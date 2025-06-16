@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -95,9 +96,10 @@ public class HomeFragment extends Fragment {
         recyclerviewLatestArticles.setAdapter(latestArticlesAdapter);
 
         latestArticlesAdapter.setOnItemClickListener(article -> {
-            Intent intent = new Intent(requireActivity(), DetailArticleActivity.class);
-            intent.putExtra("article_object", article); // Giả sử Article đã implements Serializable
-            startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putString("articleId", article.getId());
+
+            Navigation.findNavController(requireView()).navigate(R.id.action_home_to_detail, bundle);
         });
     }
 

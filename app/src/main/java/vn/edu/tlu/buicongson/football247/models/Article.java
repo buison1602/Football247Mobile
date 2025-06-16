@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp;
 import java.io.Serializable;
 import java.util.List;
 
-public class Article implements Serializable {
+public class Article{
     private String id;
     private String title;
     private String description;

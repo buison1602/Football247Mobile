@@ -104,10 +104,6 @@ public class LatestArticlesAdapter extends RecyclerView.Adapter<LatestArticlesAd
                         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, dd/MM/yyyy", Locale.getDefault());
                         String formattedDate = sdf.format(date);
 
-                        Log.w("LatestArticle123", "title: " + title);
-                        Log.w("LatestArticle123", "createdAt: " + createdAt);
-                        Log.w("LatestArticle123", "headerImageUrl: " + headerImageUrl);
-
                         titleTextView.setText(title);
 
                         createdAtTextView.setText(formattedDate);
@@ -120,6 +116,4 @@ public class LatestArticlesAdapter extends RecyclerView.Adapter<LatestArticlesAd
                     }
                 }).addOnFailureListener(e -> Log.e(TAG, "Lỗi khi lấy thông tin đội bóng: " + articleId, e));
     }
-
-
 }
