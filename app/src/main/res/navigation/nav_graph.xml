@@ -23,6 +23,18 @@
         tools:layout="@layout/fragment_leagues" />
 
     <fragment
+        android:id="@+id/navigation_news"
+        android:name="vn.edu.tlu.buicongson.football247.fragments.NewsFragment"
+        android:label="News"
+        tools:layout="@layout/fragment_news" >
+
+        <action
+            android:id="@+id/action_news_to_article_detail"
+            app:destination="@id/navigation_article_detail" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_article_detail"
         android:name="vn.edu.tlu.buicongson.football247.fragments.ArticleDetailFragment"
         android:label="ArticleDetail"
